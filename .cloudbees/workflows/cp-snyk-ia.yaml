@@ -1,0 +1,14 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: cp-snyk-ia
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    steps:
+      - uses: cloudbees-io/checkout@v1
+        name: checkout
+
+      - uses: cp-snyk-sast
+        name: snyk sast
