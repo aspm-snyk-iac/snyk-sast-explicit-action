@@ -1,0 +1,24 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: snyk-sast-scan-code
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    steps:
+      - uses: cloudbees-io/checkout@v1
+        name: checkout
+
+      - name: Scan with Snyk SAST
+        uses: cloudbees-io/snyk-sast-scan-code@v1
+        with:
+          orgname: ${{ vars.SNYK_ORG_ID }}
+          token: ${{ secrets.SNYK_TOKEN }}
+          language: "LANGUAGE_JAVA"
+          
+      - name: Scan with Snyk SCA
+        uses: cloudbees-io/snyk-sca-scan-dependency@v1
+        with:
+          orgname: ${{ vars.SNYK_ORG_NAME }}
+          token: ${{ secrets.SNYK_TOKEN }}
