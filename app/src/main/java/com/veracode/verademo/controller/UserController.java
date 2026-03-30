@@ -257,6 +257,8 @@ public class UserController {
 						String.format("%0" + (password.length() - 2) + "d", 0).replace("0", "*"));
 			} else {
 				return "No password found for " + username;
+				String password = result.getString("password_hint");
+
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
